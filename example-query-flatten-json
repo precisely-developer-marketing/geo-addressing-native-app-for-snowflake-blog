@@ -1,0 +1,18 @@
+WITH base_data AS (
+SELECT GEO_ADDRESSING.v1.geocode_single_line(ADDRESS, 'USA') AS GEOCODE_SINGLE_LINE 
+  FROM 
+      EXERCISE_DB.PUBLIC.SAMPLE_ADDRESS
+)
+SELECT
+  GEOCODE_SINGLE_LINE:response:results[0]:address:addressNumber::STRING AS address_number,
+  GEOCODE_SINGLE_LINE:response:results[0]:address:street::STRING AS street,
+  GEOCODE_SINGLE_LINE:response:results[0]:address:city.longName::STRING AS city,
+  GEOCODE_SINGLE_LINE:response:results[0]:address:admin1.shortName::STRING AS state,
+  GEOCODE_SINGLE_LINE:response:results[0]:address:country.name::STRING AS country,
+  GEOCODE_SINGLE_LINE:response:results[0]:address:postalCode::STRING AS postal_code,
+  GEOCODE_SINGLE_LINE:response:results[0]:address:postalCodeExt::STRING AS postal_code_ext,
+  GEOCODE_SINGLE_LINE:response:results[0]:address:formattedAddress::STRING AS formatted_address,
+  GEOCODE_SINGLE_LINE:response:results[0]:customFields.PB_KEY::STRING AS pbkey,
+  GEOCODE_SINGLE_LINE:response:results[0]:location:feature:geometry:coordinates[1]::FLOAT AS latitude,
+  GEOCODE_SINGLE_LINE:response:results[0]:location:feature:geometry:coordinates[0]::FLOAT AS longitude
+FROM base_data;
