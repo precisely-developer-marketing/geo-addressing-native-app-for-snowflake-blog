@@ -1,0 +1,6 @@
+SELECT 
+    <ADDRESS>, 
+    <COUNTRY>,  
+    <APP-NAME>.v1.geocode_single_line(<ADDRESS>, <COUNTRY>)
+AS GEOCODE_SINGLE_LINE 
+FROM <ADDRESS_TABLE_NAME>;
